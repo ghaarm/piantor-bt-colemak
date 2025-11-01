@@ -39,7 +39,6 @@
           // optional: nur auf bestimmten Layern aktivieren
           // layers = <0 1>; 
         };
-    };
         // COMBO(lgui-enter, &kp LG(RET), 24 53 54) // shift enter + space
         // COMBO(shift-del-backspace, &kp BSPC, 24 52) // shift enter + space
         // COMBO(hyper-hash, &kp LG(LC(LA(LS(NON_US_HASH)))), 12 52 23) // shift enter + space
