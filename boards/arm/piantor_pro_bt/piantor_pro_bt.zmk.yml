@@ -5,7 +5,8 @@ type: board
 arch: arm
 features:
   - keys
-  - underglow
+# RGB ausstellen
+  # - underglow
   - studio
 outputs:
   - usb
