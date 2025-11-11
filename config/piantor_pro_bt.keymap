@@ -32,13 +32,13 @@
     combos {
         compatible = "zmk,combos";
         // BEISPIEL: Positionen anpassen!
-        combo_cmd_del_to_ctrl_k {
-          timeout-ms = <50>;                  // 30–60 ms ist üblich
-          key-positions = <38 40>;  // <-- HIER deine Positionsnummern
-          bindings = <&kp LC(K)>;             // Ausgabe: Ctrl+K
-          // optional: nur auf bestimmten Layern aktivieren
-          // layers = <0 1>; 
-        };
+        // combo_cmd_del_to_ctrl_k {
+        //   timeout-ms = <50>;                  // 30–60 ms ist üblich
+        //   key-positions = <38 40>;  // <-- HIER deine Positionsnummern
+        //   bindings = <&kp LC(K)>;             // Ausgabe: Ctrl+K
+        //   // optional: nur auf bestimmten Layern aktivieren
+        //   // layers = <0 1>; 
+        // };
         // COMBO(lgui-enter, &kp LG(RET), 24 53 54) // shift enter + space
         // COMBO(shift-del-backspace, &kp BSPC, 24 52) // shift enter + space
         // COMBO(hyper-hash, &kp LG(LC(LA(LS(NON_US_HASH)))), 12 52 23) // shift enter + space
@@ -56,7 +56,13 @@
   // };
 
   behaviors {
-
+    del_gui_to_ctrlk: del_gui_to_ctrlk {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      // Tap normal: DEL; wenn GUI/Cmd gehalten: Ctrl+K
+      bindings = <&kp DEL>, <&kp LC(K)>;
+      mods = <(MOD_LGUI|MOD_RGUI)>;
+    };
     tp_rep: tp_rep {
       compatible = "zmk,behavior-hold-tap";
       label = "tp_rep";
@@ -139,7 +145,7 @@
 &tp LG(LC(RA(LEFT_SHIFT))) TAB    &kp Q                     &kp W    &kp F             &kp P         &kp B                    &kp J        &kp L         &morph_ue  &kp Z    &kp RIGHT_BRACKET                 &tp LG(LC(RA(LEFT_SHIFT))) NON_US_HASH
 &mt LEFT_SHIFT ESCAPE             &morph_ae                 &kp R    &morph_ss         &kp T         &kp G                    &kp M        &kp N         &kp E      &kp I    &morph_oe                         &kp RIGHT_SHIFT
 &kp LEFT_CONTROL                  &ts LC(LA(LEFT_SHIFT)) Y  &kp X    &kp C             &kp D         &kp V                    &kp K        &kp H         &kp COMMA  &kp DOT  &ts LC(LA(LEFT_SHIFT)) SLASH      &kp LEFT_CONTROL
-                                                                     &tp_rep LALT 0    &lt 1 DEL     &tp LGUI ENTER           &tp LGUI SPC &lt 2 BSPC    &kp LALT    
+                                                                     &tp_rep LALT 0    &lt 1 &del_gui_to_ctrlk     &tp LGUI ENTER           &tp LGUI SPC &lt 2 BSPC    &kp LALT    
             >;
         };
 
