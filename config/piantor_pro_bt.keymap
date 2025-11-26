@@ -25,7 +25,7 @@
 #define UPPER 2
 
 // &mt { tapping-term-ms = <125>; };
-&mt { tapping-term-ms = <100>; };
+&mt { tapping-term-ms = <125>; };
 &lt { quick-tap-ms = <200>; };
 
 / {
