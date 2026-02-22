@@ -57,20 +57,20 @@
   // };
 
   behaviors {
-    backspace_gui_to_ctrlu: backspace_gui_to_ctrlu {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      // Tap normal: DEL; wenn GUI/Cmd gehalten: Ctrl+K
-      bindings = <&kp BSPC>, <&kp LC(U)>;
-      mods = <(MOD_LGUI|MOD_RGUI)>;
-    };
-    del_gui_to_ctrlk: del_gui_to_ctrlk {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      // Tap normal: DEL; wenn GUI/Cmd gehalten: Ctrl+K
-      bindings = <&kp DEL>, <&kp LC(K)>;
-      mods = <(MOD_LGUI|MOD_RGUI)>;
-    };
+    // backspace_gui_to_ctrlu: backspace_gui_to_ctrlu {
+    //   compatible = "zmk,behavior-mod-morph";
+    //   #binding-cells = <0>;
+    //   // Tap normal: DEL; wenn GUI/Cmd gehalten: Ctrl+K
+    //   bindings = <&kp BSPC>, <&kp LC(U)>;
+    //   mods = <(MOD_LGUI|MOD_RGUI)>;
+    // };
+    // del_gui_to_ctrlk: del_gui_to_ctrlk {
+    //   compatible = "zmk,behavior-mod-morph";
+    //   #binding-cells = <0>;
+    //   // Tap normal: DEL; wenn GUI/Cmd gehalten: Ctrl+K
+    //   bindings = <&kp DEL>, <&kp LC(K)>;
+    //   mods = <(MOD_LGUI|MOD_RGUI)>;
+    // };
     tp_rep: tp_rep {
       compatible = "zmk,behavior-hold-tap";
       label = "tp_rep";
