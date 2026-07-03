@@ -169,7 +169,7 @@
 
           display-name = "NUMBER";
             bindings = <
-&kp GRAVE  &kp LS(NUMBER_1)  &kp LS(NUMBER_2)  &kp LS(NUMBER_3)  &kp DOLLAR        &kp PERCENT           &kp LS(N6)        &kp LS(N7)      &kp LS(N8)            &kp LS(N9)             &kp LS(N0)  &kp LS(MINUS)
+&kp GRAVE  &kp LS(NUMBER_1)  &kp LS(NUMBER_2)  &kp LS(NUMBER_3)  &kp DOLLAR        &kp PERCENT           &kp LS(N6)        &kp LS(N7)      &kp LS(N8)            &kp LS(N9)             &kp LS(N0)  &kp QUESTION
 &trans           &kp N1            &kp N2      &kp N3            &kp N4            &kp N5          &kp NON_US_BSLH     &kp LS(LA(N7))  &kp LA(N8)            &kp LA(N9)             &kp RA(N0)  &kp EQUAL
 &trans     &kp N6      &kp N7            &kp N8            &kp N9   &kp N0                &kp LS(NON_US_BSLH)  &kp LA(N7)      &kp LS(LG(N8))        &kp LS(LG(N9))         &kp PIPE       &kp PIPE 
                                                      &trans            &trans            &trans                &trans            &trans          &trans
