@@ -7,6 +7,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/pointing.h>
 
 // #include <dt-bindings/zmk/ext_power.h>
 // https://joshinator.de/posts/zmk-combo-helper/
@@ -83,6 +84,15 @@
       flavor = "tap-preferred";
       bindings = <&kp>, <&key_repeat>;
     };
+    ctrl_rclick: ctrl_rclick {
+      compatible = "zmk,behavior-hold-tap";
+      label = "CTRL_RCLICK";
+      #binding-cells = <2>;
+      tapping-term-ms = <200>;
+      quick-tap-ms = <0>;
+      flavor = "hold-preferred";
+      bindings = <&kp>, <&mkp>;
+    };
     morph_ae: morph_ae {
       compatible = "zmk,behavior-mod-morph";
       #binding-cells = <0>;
@@ -155,7 +165,7 @@
             bindings = <
 &tp LG(LC(RA(LEFT_SHIFT))) TAB    &kp Q                     &kp W    &kp F             &kp P         &kp B                    &kp J        &kp L         &morph_ue  &kp Z    &kp RIGHT_BRACKET                 &tp LG(LC(RA(LEFT_SHIFT))) NON_US_HASH
 &mt LEFT_SHIFT ESCAPE             &morph_ae                 &kp R    &morph_ss         &kp T         &kp G                    &kp M        &kp N         &kp E      &kp I    &morph_oe                         &kp RIGHT_SHIFT
-&kp LEFT_CONTROL                  &ts LC(LA(LEFT_SHIFT)) Y  &kp X    &kp C             &kp D         &kp V                    &kp K        &kp H         &kp COMMA  &kp DOT  &ts LC(LA(LEFT_SHIFT)) SLASH      &kp LEFT_CONTROL
+&kp LEFT_CONTROL                  &ts LC(LA(LEFT_SHIFT)) Y  &kp X    &kp C             &kp D         &kp V                    &kp K        &kp H         &kp COMMA  &kp DOT  &ts LC(LA(LEFT_SHIFT)) SLASH      &ctrl_rclick LEFT_CONTROL RCLK
                                                                      &tp_rep LALT 0    &lt 1 DEL     &tp LWIN ENTER           &tp LWIN SPC &lt 2 BSPC    &kp LALT    
             >;
         };
