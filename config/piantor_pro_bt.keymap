@@ -27,8 +27,8 @@ layers = <0>; \
 
 // Beschleunigung für mouse scrolling einstellen
 &msc {
-  time-to-max-speed-ms = <600>;
-  acceleration-exponent = <2>;
+  time-to-max-speed-ms = <250>;
+  acceleration-exponent = <1>;
 };
 
 // &mt { tapping-term-ms = <125>; };
