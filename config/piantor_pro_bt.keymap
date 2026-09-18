@@ -27,7 +27,7 @@ layers = <0>; \
 
 // Beschleunigung für mouse scrolling einstellen
 &msc {
-  time-to-max-speed-ms = <250>;
+  time-to-max-speed-ms = <150>;
   acceleration-exponent = <1>;
 };
 

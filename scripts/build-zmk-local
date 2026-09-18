@@ -1,0 +1,80 @@
+#!/bin/zsh
+
+set -euo pipefail
+
+repo_root="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)"
+alias_root="/private/tmp/piantor-zmk-local"
+workspace="$alias_root/.zmk-workspace/zmk"
+venv="$alias_root/.venv"
+sdk="$alias_root/.zmk-workspace/zephyr-sdk-0.16.8"
+build_root="$alias_root/.zmk-workspace/local-build"
+output_dir="$alias_root/build-local"
+
+case "${1:-all}" in
+  left|right|all) target="${1:-all}" ;;
+  *)
+    print -u2 "Aufruf: $0 [left|right|all]"
+    exit 2
+    ;;
+esac
+
+if [[ -L "$alias_root" ]]; then
+  if [[ "$(readlink "$alias_root")" != "$repo_root" ]]; then
+    print -u2 "$alias_root zeigt auf ein anderes Verzeichnis."
+    exit 1
+  fi
+elif [[ -e "$alias_root" ]]; then
+  print -u2 "$alias_root existiert bereits und ist kein Symlink."
+  exit 1
+else
+  ln -s "$repo_root" "$alias_root"
+fi
+
+for required in "$venv/bin/west" "$venv/bin/cmake" "$sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc"; do
+  if [[ ! -x "$required" ]]; then
+    print -u2 "Lokale ZMK-Umgebung fehlt: $required"
+    exit 1
+  fi
+done
+
+if ! command -v dtc >/dev/null 2>&1; then
+  print -u2 "dtc fehlt. Installation auf macOS: brew install dtc"
+  exit 1
+fi
+
+build_half() {
+  local half="$1"
+  local board="piantor_pro_bt_${half}"
+  local build_dir="$build_root/$half"
+  local output_file="$output_dir/${board}.uf2"
+
+  print "Baue ${board} ..."
+  (
+    cd -L "$workspace/app"
+    env -u CPPFLAGS -u LDFLAGS \
+      PATH="$venv/bin:/opt/homebrew/bin:$PATH" \
+      ZEPHYR_SDK_INSTALL_DIR="$sdk" \
+      "$venv/bin/west" build \
+        -p always \
+        -s "$workspace/app" \
+        -d "$build_dir" \
+        -b "$board" \
+        -- \
+        -DSHIELD=nice_view \
+        -DZMK_CONFIG="$alias_root/config" \
+        -DZMK_EXTRA_MODULES="$alias_root" \
+        -DCONFIG_ZMK_STUDIO=n
+  )
+
+  mkdir -p "$output_dir"
+  cp "$build_dir/zephyr/zmk.uf2" "$output_file"
+  print "Fertig: $repo_root/build-local/${board}.uf2"
+}
+
+if [[ "$target" == "left" || "$target" == "all" ]]; then
+  build_half left
+fi
+
+if [[ "$target" == "right" || "$target" == "all" ]]; then
+  build_half right
+fi
